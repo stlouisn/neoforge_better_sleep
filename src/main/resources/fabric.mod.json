@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "no_sneaking_over_magma",
+  "version": "${version}",
+
+  "name": "Example Mod",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/no_sneaking_over_magma",
+    "sources": "https://gitlab.com/supersaiyansubtlety/no_sneaking_over_magma"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/no_sneaking_over_magma/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.sssubtlety.no_sneaking_over_magma.NoSneakingOverMagmaInit"
+    ],
+    "modmenu": [
+      "net.sssubtlety.no_sneaking_over_magma.NoSneakingOverMagmaModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "no_sneaking_over_magma.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.1"
+  },
+  "suggests": {
+  }
+}

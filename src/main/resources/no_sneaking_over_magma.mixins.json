@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.sssubtlety.no_sneaking_over_magma.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "plugin": "net.sssubtlety.no_sneaking_over_magma.mixin.MixinConditions",
+  "mixins": [
+    "EntityMixin",
+    "MagmaBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
