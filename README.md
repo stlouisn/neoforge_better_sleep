@@ -9,4 +9,4 @@ Makes it so that you take damage on magma blocks even while sneaking.
 Can also optionally make you take damage on magma blocks even while wearing Frostwalker-enchanted boots.
 
 Configure options either by editing `.minecraft/config/no_sneaking_over_magma.json`,
-or through ModMenu's config menu if you have it installed. 
+or through ModMenu's config menu if you have ModMenu installed. 

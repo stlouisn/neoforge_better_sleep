@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class NoSneakingOverMagmaModMenuIntegration implements ModMenuApi {
     @Override
     public String getModId() {
-        return "automated_crafting";
+        return "no_sneaking_over_magma";
     }
 
     @Override
@@ -29,7 +29,6 @@ public class NoSneakingOverMagmaModMenuIntegration implements ModMenuApi {
         };
     }
 
-//    @Override
     public Optional<Supplier<Screen>> getConfigScreen(Screen screen) {
         return Optional.of(AutoConfig.getConfigScreen(net.sssubtlety.no_sneaking_over_magma.NoSneakingOverMagmaConfig.class, screen));
     }

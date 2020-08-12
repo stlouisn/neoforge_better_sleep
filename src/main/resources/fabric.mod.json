@@ -3,10 +3,10 @@
   "id": "no_sneaking_over_magma",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "No Sneaking Over Magma!",
+  "description": "Makes magma deal damage even when players are crouching. ",
   "authors": [
-    "Me!"
+    "supersaiyansubtlety"
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/no_sneaking_over_magma",
@@ -14,13 +14,10 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/no_sneaking_over_magma/icon.png",
+  "icon": "assets/no_sneaking_over_magma/no_sneaking_over_magma_icon.png",
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "net.sssubtlety.no_sneaking_over_magma.NoSneakingOverMagmaInit"
-    ],
     "modmenu": [
       "net.sssubtlety.no_sneaking_over_magma.NoSneakingOverMagmaModMenuIntegration"
     ]
@@ -31,9 +28,9 @@
 
   "depends": {
     "fabricloader": ">=0.7.4",
-    "fabric": "*",
-    "minecraft": "1.16.1"
+    "minecraft": "1.16.2"
   },
   "suggests": {
+    "modmenu": ">=1.12.2+build.17"
   }
 }

@@ -11,14 +11,14 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @Shadow public abstract boolean bypassesLandingEffects();
+    @Shadow public abstract boolean bypassesSteppingEffects();
 
     @Redirect(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;bypassesSteppingEffects()Z"))
     boolean bypassesSteppingEffectsExceptMagma(Entity entity) {
         if(((Entity)(Object)this).world.getBlockState(this.callGetLandingPos()).getBlock() instanceof MagmaBlock) {
             return false;
         } else {
-            return this.bypassesLandingEffects();
+            return this.bypassesSteppingEffects();
         }
     }
 
