@@ -1,0 +1,1 @@
+- 1.0.4 (18 Sep. 2020): Marked as compatible with 1.16.3. 
