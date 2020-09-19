@@ -1,36 +1,34 @@
 {
   "schemaVersion": 1,
-  "id": "no_sneaking_over_magma",
-  "version": "${version}",
+  "id": "${mod_id}",
+  "version": "${mod_version}",
 
   "name": "No Sneaking Over Magma!",
   "description": "Makes magma deal damage even when players are crouching. ",
   "authors": [
-    "supersaiyansubtlety"
+    "${author}"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/no_sneaking_over_magma",
-    "sources": "https://gitlab.com/supersaiyansubtlety/no_sneaking_over_magma"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/${archives_base_name}",
+    "sources": "https://gitlab.com/${author}/${mod_id}"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/no_sneaking_over_magma/no_sneaking_over_magma_icon.png",
+  "icon": "assets/${mod_id}/${mod_id}_icon.png",
 
   "environment": "*",
   "entrypoints": {
     "modmenu": [
-      "net.sssubtlety.no_sneaking_over_magma.NoSneakingOverMagmaModMenuIntegration"
+      "${maven_group}.${mod_id}.NoSneakingOverMagmaModMenuIntegration"
     ]
   },
   "mixins": [
-    "no_sneaking_over_magma.mixins.json"
+    "${mod_id}.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.4",
-    "minecraft": "1.16.2"
-  },
-  "suggests": {
-    "modmenu": ">=1.12.2+build.17"
+    "fabricloader": ">=${loader_version}",
+    "fabric": ">=${min_fabric_api_version}",
+    "minecraft": ">=${min_minecraft_version} <=${minecraft_version}"
   }
 }
