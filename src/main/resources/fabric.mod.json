@@ -3,8 +3,8 @@
   "id": "${mod_id}",
   "version": "${mod_version}",
 
-  "name": "No Sneaking Over Magma!",
-  "description": "Makes magma deal damage even when players are crouching. ",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
   "authors": [
     "${author}"
   ],
@@ -13,13 +13,16 @@
     "sources": "https://gitlab.com/${author}/${mod_id}"
   },
 
-  "license": "CC0-1.0",
+  "license": "https://will-lucic.mit-license.org/",
   "icon": "assets/${mod_id}/${mod_id}_icon.png",
 
   "environment": "*",
   "entrypoints": {
+    "client": [
+      "${maven_group}.${mod_id}.${ModId}ClientInit"
+    ],
     "modmenu": [
-      "${maven_group}.${mod_id}.NoSneakingOverMagmaModMenuIntegration"
+      "${maven_group}.${mod_id}.${ModId}ModMenuIntegration"
     ]
   },
   "mixins": [
@@ -27,7 +30,7 @@
   ],
 
   "depends": {
-    "fabricloader": ">=${loader_version}",
+    "fabricloader": ">=${min_loader_version}",
     "fabric": ">=${min_fabric_api_version}",
     "minecraft": ">=${min_minecraft_version} <=${minecraft_version}"
   }
