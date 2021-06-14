@@ -3,18 +3,14 @@ buildscript {
 		jcenter()
 		mavenCentral()
 	}
-	dependencies {
-		classpath "com.github.yuchi:npm-semver:1.0.0"
-	}
 }
 
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 	id 'maven-publish'
+	id "com.modrinth.minotaur" version "1.1.0"
+	id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
-
-import com.github.yuchi.semver.Version
-import com.github.yuchi.semver.Range
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -36,9 +32,11 @@ repositories {
 		url = "https://minecraft.guntram.de/maven/"
 	}
 
+	maven { url "https://maven.shedaniel.me/" }
+
 	maven {
-		name = "noauth"
-		url = "https://dl.bintray.com/user11681/maven"
+		name = "Terraformers"
+		url = "https://maven.terraformersmc.com/releases/"
 	}
 
 	maven {
@@ -62,34 +60,25 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:" + project.fabric_api_version
 
 	//Config library
-	modApi (include("me.sargunvohra.mcmods:autoconfig1u:" + project.autoconfig1u_version)) { exclude module: 'fabric-api' }
+	modApi ("me.sargunvohra.mcmods:autoconfig1u:" + project.autoconfig_version) { exclude module: 'fabric-api' }
 	//Config GUI support
-	modApi (include("me.shedaniel.cloth:config-2:" + project.cloth_config_2_version)) { exclude module: 'fabric-api' }
+	modApi ("me.shedaniel.cloth:cloth-config-fabric:" + project.cloth_config_version) { exclude module: 'fabric-api' }
 	//Config menu support
-	modImplementation ("io.github.prospector:modmenu:" + project.modmenu_version) { exclude module: 'fabric-api' }
+	modImplementation ("com.terraformersmc:modmenu:" + project.modmenu_version) { exclude module: 'fabric-api' }
 
 	// Translation fetching
 	modImplementation "de.guntram.mcmod:crowdin-translate:" + project.crowdin_translate_version
 	include "de.guntram.mcmod:crowdin-translate:" + project.crowdin_translate_version
-
-	Version modVer = Version.from(project.minecraft_version, false)
-	Range noAuthRange = Range.from(">=1.16.4", false)
-
-	if (noAuthRange.test(modVer)) {
-		// dev only, prevent authentication
-		modApi("user11681:noauth:+")
-	}
-
-
 }
 
 processResources {
 	inputs.property "version", project.version
 	inputs.property "mod_id", project.mod_id
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
+	filesMatching("fabric.mod.json") {
 		expand ([
+				"version": project.version,
+
 				"minecraft_version": project.minecraft_version,
 				"min_loader_version": project.min_loader_version,
 
@@ -106,15 +95,10 @@ processResources {
 
 				"fabric_api_version": project.fabric_api_version,
 				"min_fabric_api_version": project.min_fabric_api_version,
-				"autoconfig1u_version": project.autoconfig1u_version,
-				"cloth_config_2_version": project.cloth_config_2_version,
+				"autoconfig_version": project.autoconfig_version,
+				"cloth_config_version": project.cloth_config_version,
 				"modmenu_version": project.modmenu_version,
-				"ModMenuIntegrationClass": project.ModId + "ModMenuIntegration"
 		])
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
 	}
 }
 
@@ -137,23 +121,91 @@ jar {
 	from "LICENSE"
 }
 
-// configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
+import com.modrinth.minotaur.TaskModrinthUpload
+
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+def readFileFirstLine(String fileName) {
+	def firstLine = null
+	file(fileName).withReader { reader ->
+		def line
+		if ((line = reader.readLine()) != null)
+			firstLine = line
+	}
+
+	return firstLine
+}
+
+def readRecentChanges() {
+	def newVersionLineRegex = "^(- \\d+\\.\\d+(?:\\.\\d+(?:-[\\da-z]+)?)?" + " \\(\\d{1,2} [A-Z][a-z]{2}\\.? 2021\\): )" + "(.*)"
+	Pattern newVersionLinePattern = Pattern.compile(newVersionLineRegex)
+
+	def changelogFile = file("CHANGELOG.md")
+	def changes = ""
+
+	changelogFile.withReader { reader ->
+		String line
+		def firstLine = true
+		while ((line = reader.readLine()) != null) {
+			if (firstLine) {
+				firstLine = false
+				if (line.matches(newVersionLineRegex)) {
+					Matcher lineMatcher = newVersionLinePattern.matcher(line)
+					lineMatcher.find()
+					if (!lineMatcher.group(1).startsWith(project.mod_version, 2))
+						throw new Exception("Version on first line of changelog doesn't match mod_version. ")
+					def trimmedLine = lineMatcher.group(2)
+					if (!trimmedLine.isEmpty())changes += trimmedLine + "\n\n"
+				} else throw new Exception("First line of changelog is not new version line. ")
+			} else if (!line.matches(newVersionLineRegex)) {
+				changes += line + "\n\n"
+			} else break
 		}
 	}
 
-	// select the repositories you want to publish to
-	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
+	return changes
+}
+
+curseforge {
+	def curseApiKey = readFileFirstLine("..\\CURSE_API_KEY.secret")
+	if (curseApiKey != null) {
+		apiKey = curseApiKey
+		project {
+			id = project.curseforge_id
+			releaseType = mod_version.endsWith("a") ? "alpha" : mod_version.endsWith("b") ? "beta" : "release"
+			project.minecraft_versions.split(",").each { String game_version -> addGameVersion game_version }
+			addGameVersion "Fabric"
+
+			changelogType = "markdown"
+			changelog = readRecentChanges()
+			relations {
+				requiredDependency "fabric-api"
+			}
+			mainArtifact(remapJar.archivePath) { }
+
+			afterEvaluate {
+				uploadTask.dependsOn("build")
+			}
+		}
+	}
+	options {
+		forgeGradleIntegration = false
+		javaVersionAutoDetect = false
 	}
 }
+
+task modrinth(type: TaskModrinthUpload) {
+	token = readFileFirstLine("..\\MODRINTH_TOKEN.secret") // Use an environment property!
+	projectId = project.modrinth_id
+	versionNumber = project.version
+	uploadFile = remapJar.archivePath // This is the java jar task
+	changelog = readRecentChanges()
+	project.minecraft_versions.split(",").each { String game_version -> addGameVersion(game_version) }
+	addLoader('fabric')
+}
+
+task publishMod {
+	dependsOn = ["modrinth", "curseforge"]
+}
+

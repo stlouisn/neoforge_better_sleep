@@ -32,6 +32,11 @@
   "depends": {
     "fabricloader": ">=${min_loader_version}",
     "fabric": ">=${min_fabric_api_version}",
-    "minecraft": ">=${min_minecraft_version} <=${minecraft_version}"
+    "minecraft": ">=${min_minecraft_version} <=${minecraft_version}",
+    "cloth-config2": ">=${cloth_config_version}",
+    "autoconfig1u": ">=${autoconfig_version}"
+  },
+  "recommends": {
+    "modmenu": ">=${modmenu_version}"
   }
 }
