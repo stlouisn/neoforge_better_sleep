@@ -15,11 +15,24 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-archivesBaseName = project.archives_base_name
-version = project.mod_version + "+MC" +
-		((project.min_minecraft_version != project.minecraft_version ?
-				project.min_minecraft_version + "-" : "") +
-				project.minecraft_version)
+String unPunctuated = project.mod_name.replaceAll("[',!?]", "")
+
+project.ext {
+	ModId = unPunctuated.replace(" ", "")
+	mod_id = unPunctuated.toLowerCase().replace(" ", "_")
+	archives_base_name = project.ext.mod_id.replace("_", "-")
+
+	minecraft_version_list = project.minecraft_versions.split(",")
+	min_minecraft_version = project.ext.minecraft_version_list[0]
+	minecraft_version = project.ext.minecraft_version_list[project.ext.minecraft_version_list.size() - 1]
+}
+
+String mc_ver_suffix = "+MC" + ((project.ext.minecraft_version_list.size() > 1 ?
+		project.ext.min_minecraft_version + "-" : "") +
+		project.ext.minecraft_version)
+
+version = project.mod_version + mc_ver_suffix
+archivesBaseName = project.ext.archives_base_name
 
 group = project.maven_group
 
@@ -36,7 +49,8 @@ repositories {
 
 	maven {
 		name = "Terraformers"
-		url = "https://maven.terraformersmc.com/releases/"
+//		url = "https://maven.terraformersmc.com/releases/"
+		url = "https://maven.kotlindiscord.com/repository/terraformers/"
 	}
 
 	maven {
@@ -52,7 +66,7 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:" + project.minecraft_version
+	minecraft "com.mojang:minecraft:" + project.ext.minecraft_version
 	mappings "net.fabricmc:yarn:" + project.yarn_mappings
 	modImplementation "net.fabricmc:fabric-loader:" + project.loader_version
 
@@ -79,7 +93,7 @@ processResources {
 		expand ([
 				"version": project.version,
 
-				"minecraft_version": project.minecraft_version,
+				"minecraft_version": project.ext.minecraft_version,
 				"min_loader_version": project.min_loader_version,
 
 				"mod_id": project.mod_id,
@@ -164,6 +178,8 @@ def readRecentChanges() {
 		}
 	}
 
+	changes += "\n\nA cumulative changelog can be found [here](https://gitlab.com/supersaiyansubtlety/${project.ext.mod_id}/-/blob/master/CHANGELOG.md)"
+
 	return changes
 }
 
@@ -174,7 +190,7 @@ curseforge {
 		project {
 			id = project.curseforge_id
 			releaseType = mod_version.endsWith("a") ? "alpha" : mod_version.endsWith("b") ? "beta" : "release"
-			project.minecraft_versions.split(",").each { String game_version -> addGameVersion game_version }
+			project.ext.minecraft_version_list.each { String game_version -> addGameVersion game_version }
 			addGameVersion "Fabric"
 
 			changelogType = "markdown"
@@ -201,7 +217,7 @@ task modrinth(type: TaskModrinthUpload) {
 	versionNumber = project.version
 	uploadFile = remapJar.archivePath // This is the java jar task
 	changelog = readRecentChanges()
-	project.minecraft_versions.split(",").each { String game_version -> addGameVersion(game_version) }
+	project.ext.minecraft_version_list.each { String game_version -> addGameVersion(game_version) }
 	addLoader('fabric')
 }
 
