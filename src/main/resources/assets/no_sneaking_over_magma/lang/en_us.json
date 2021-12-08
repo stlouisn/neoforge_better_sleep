@@ -1,6 +1,7 @@
 {
+  "text.autoconfig.no_sneaking_over_magma.title": "No Sneaking Over Magma! Configuration",
   "text.autoconfig.no_sneaking_over_magma.option.sneakingProtectsOnMagma": "Sneaking protects from magma",
   "text.autoconfig.no_sneaking_over_magma.option.frostWalkerProtectsOnMagma": "Frostwalker protects from magma",
-  "text.autoconfig.no_sneaking_over_magma.title": "No Sneaking Over Magma! Configuration"
-
+  "text.autoconfig.no_sneaking_over_magma.option.magmaDamagesNonLivingEntities": "Magma damages non-living entities",
+  "text.autoconfig.no_sneaking_over_magma.option.magmaSetsFireToEntities": "Magma sets fire to entities"
 }

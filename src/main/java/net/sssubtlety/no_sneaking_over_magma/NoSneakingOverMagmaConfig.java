@@ -18,7 +18,15 @@ public class NoSneakingOverMagmaConfig implements ConfigData {
     public static boolean doesFrostWalkerProtectOnMagma() {
         return INSTANCE.frostWalkerProtectsOnMagma;
     }
+    public static boolean doesMagmaDamageNonLivingEntities() {
+        return INSTANCE.magmaDamagesNonLivingEntities;
+    }
+    public static boolean doesMagmaSetFireToEntities() {
+        return INSTANCE.magmaSetsFireToEntities;
+    }
 
     private boolean sneakingProtectsOnMagma = false;
     private boolean frostWalkerProtectsOnMagma = true;
+    private boolean magmaDamagesNonLivingEntities = false;
+    private boolean magmaSetsFireToEntities = false;
 }
