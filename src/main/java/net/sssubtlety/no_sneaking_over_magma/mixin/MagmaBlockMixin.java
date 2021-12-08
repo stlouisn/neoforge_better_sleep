@@ -7,6 +7,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import static net.minecraft.enchantment.EnchantmentHelper.hasFrostWalker;
+import static net.sssubtlety.no_sneaking_over_magma.NoSneakingOverMagmaConfig.doesFrostWalkerProtectOnMagma;
+
 @Mixin(MagmaBlock.class)
 public abstract class MagmaBlockMixin extends Block {
 	public MagmaBlockMixin(Settings settings) {
@@ -16,6 +19,6 @@ public abstract class MagmaBlockMixin extends Block {
 
 	@Redirect(method = "onSteppedOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;hasFrostWalker(Lnet/minecraft/entity/LivingEntity;)Z"))
 	public boolean ignoreFrostWalker(LivingEntity entity) {
-		return false;
+		return doesFrostWalkerProtectOnMagma() && hasFrostWalker(entity);
 	}
 }

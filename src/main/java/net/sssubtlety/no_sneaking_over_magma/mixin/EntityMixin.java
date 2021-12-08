@@ -9,13 +9,15 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import static net.sssubtlety.no_sneaking_over_magma.NoSneakingOverMagmaConfig.doesSneakingProtectOnMagma;
+
 @Mixin(Entity.class)
 public abstract class EntityMixin {
     @Shadow public abstract boolean bypassesSteppingEffects();
 
     @Redirect(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;bypassesSteppingEffects()Z"))
     boolean bypassesSteppingEffectsExceptMagma(Entity entity) {
-        if(((Entity)(Object)this).world.getBlockState(this.callGetLandingPos()).getBlock() instanceof MagmaBlock) {
+        if(!doesSneakingProtectOnMagma() && ((Entity)(Object)this).world.getBlockState(this.callGetLandingPos()).getBlock() instanceof MagmaBlock) {
             return false;
         } else {
             return this.bypassesSteppingEffects();
