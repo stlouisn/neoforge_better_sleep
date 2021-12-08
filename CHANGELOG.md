@@ -1,3 +1,13 @@
+- 1.0.9 (8 Dec. 2021): 
+
+  Configs no longer require a restart to take effect!  
+
+  Added new options!
+  - Magma damages non-living entities (defaults to false)
+  - Magma sets fire to entities (defaults to false)
+  
+  Reworked mixins, improving theoretical compatibility.
+
 - 1.0.8 (9 Jul. 2021): Marked as compatible with 1.17.1.
 - 1.0.7 (13 Jun. 2021): 
   - Updated for 1.17
