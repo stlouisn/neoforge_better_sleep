@@ -6,14 +6,14 @@ buildscript {
 }
 
 plugins {
-	id 'fabric-loom' version '0.8-SNAPSHOT'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
 	id "com.modrinth.minotaur" version "1.1.0"
 	id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 String unPunctuated = project.mod_name.replaceAll("[',!?]", "")
 
@@ -24,7 +24,9 @@ project.ext {
 
 	minecraft_version_list = project.minecraft_versions.split(",")
 	min_minecraft_version = project.ext.minecraft_version_list[0]
+	min_minecraft_semver = toSemver(project.ext.min_minecraft_version, 1.18)
 	minecraft_version = project.ext.minecraft_version_list[project.ext.minecraft_version_list.size() - 1]
+	minecraft_semver = toSemver(project.ext.minecraft_version, 1.18)
 }
 
 String mc_ver_suffix = "+MC" + ((project.ext.minecraft_version_list.size() > 1 ?
@@ -49,10 +51,18 @@ repositories {
 
 	maven {
 		name = "Terraformers"
-//		url = "https://maven.terraformersmc.com/releases/"
-		url = "https://maven.kotlindiscord.com/repository/terraformers/"
+		url = "https://maven.terraformersmc.com/releases/"
+//		url = "https://maven.kotlindiscord.com/repository/terraformers/"
 	}
 
+	maven { url = 'https://maven.dblsaiko.net' }
+
+	maven {
+		url "https://oskarstrom.net/maven"
+		content { includeGroup "net.oskarstrom" }
+	}
+
+	// Broad mavens
 	maven {
 		name = "CurseMaven"
 		url = "https://www.cursemaven.com"
@@ -66,23 +76,82 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:" + project.ext.minecraft_version
-	mappings "net.fabricmc:yarn:" + project.yarn_mappings
-	modImplementation "net.fabricmc:fabric-loader:" + project.loader_version
+	minecraft("com.mojang:minecraft:${project.ext.minecraft_version}")
+	mappings("net.fabricmc:yarn:${project.yarn_mappings}")
+	modImplementation("net.fabricmc:fabric-loader:${project.loader_version}")
 
 	// FAPI
-	modImplementation "net.fabricmc.fabric-api:fabric-api:" + project.fabric_api_version
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}")
 
 	//Config library
-	modApi ("me.sargunvohra.mcmods:autoconfig1u:" + project.autoconfig_version) { exclude module: 'fabric-api' }
-	//Config GUI support
-	modApi ("me.shedaniel.cloth:cloth-config-fabric:" + project.cloth_config_version) { exclude module: 'fabric-api' }
+	requiredApi ("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}")
 	//Config menu support
-	modImplementation ("com.terraformersmc:modmenu:" + project.modmenu_version) { exclude module: 'fabric-api' }
+	optionalMod(true, "com.terraformersmc:modmenu:${project.modmenu_version}")
 
 	// Translation fetching
-	modImplementation "de.guntram.mcmod:crowdin-translate:" + project.crowdin_translate_version
-	include "de.guntram.mcmod:crowdin-translate:" + project.crowdin_translate_version
+	bundledMod("de.guntram.mcmod:crowdin-translate:${project.crowdin_translate_version}")
+
+	// speed up launching in dev
+	devRuntime "com.github.astei:lazydfu:${project.lazy_dfu_version}"
+	devRuntime "net.oskarstrom:DashLoader:${project.dashloader_version}"
+
+	// remember window size+pos in dev
+	devRuntime "net.dblsaiko:winwonders:${project.winwonders_version}"
+}
+
+def requiredMod_(String dep) {
+	dependencies.modImplementation(dep) {
+		exclude group: "net.fabricmc.fabric-api"
+		exclude module: "nbt-crafting"
+	}
+}
+
+def requiredApi(String dep) {
+	dependencies.modApi(dep) {
+		exclude group: "net.fabricmc.fabric-api"
+		exclude module: "nbt-crafting"
+	}
+}
+
+def bundle(String dep) {
+	dependencies.include(dep) {
+		exclude group: "net.fabricmc.fabric-api"
+		exclude module: "nbt-crafting"
+	}
+}
+
+def devRuntime(String dep) {
+	dependencies.modRuntimeOnly (dep) {
+		exclude group: "net.fabricmc.fabric-api"
+		exclude module: "nbt-crafting"
+	}
+}
+
+def optionalMod(boolean enabled, String dep) {
+	if (enabled) devRuntime(dep)
+
+	dependencies.modCompileOnly (dep) {
+		exclude group: "net.fabricmc.fabric-api"
+		exclude module: "nbt-crafting"
+	}
+}
+
+def optionalApi(boolean enabled, String dep) {
+	if (enabled) devRuntime(dep)
+	dependencies.compileOnlyApi (dep) {
+		exclude group: "net.fabricmc.fabric-api"
+		exclude module: "nbt-crafting"
+	}
+}
+
+def bundledMod(String dep) {
+	requiredMod_(dep)
+	bundle(dep)
+}
+
+def bundledApi(String dep) {
+	requiredApi(dep)
+	bundle(dep)
 }
 
 processResources {
@@ -109,7 +178,6 @@ processResources {
 
 				"fabric_api_version": project.fabric_api_version,
 				"min_fabric_api_version": project.min_fabric_api_version,
-				"autoconfig_version": project.autoconfig_version,
 				"cloth_config_version": project.cloth_config_version,
 				"modmenu_version": project.modmenu_version,
 		])
@@ -140,6 +208,60 @@ import com.modrinth.minotaur.TaskModrinthUpload
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
+static def toSemver(String baseVersion, float prefix) {
+	def length = baseVersion.length()
+	for (int i = 0; i < length; i++) {
+		char c = baseVersion.charAt(i);
+		switch (i) {
+			case 0: if (c != (char)'1') return snapshotToSemver(baseVersion, i, prefix); break
+			case 1: if (c != (char)'.') return snapshotToSemver(baseVersion, i, prefix); break
+			case 2||3: if (!(""+c).matches("\\d")) throw illegalVersionFormatException(); break
+			default: if (c == (char)'-') return betaOrRcToSemver(baseVersion, i); break
+		}
+	}
+	return baseVersion
+}
+
+static def snapshotToSemver(baseVersion, i, prefix) {
+	def length = baseVersion.length()
+	if (length != 6) throw illegalVersionFormatException()
+	StringBuilder snapShotSemver = new StringBuilder((String)(String.valueOf(prefix) + "-alpha."))
+	for (int j = 0; j < length; j++) {
+		char c = baseVersion.charAt(i)
+		switch (j) {
+			case 2:
+				if (c != (char)'w') throw illegalVersionFormatException()
+				else snapShotSemver.append("."); break
+			case 5:
+				if (c != (char)'a') throw illegalVersionFormatException()
+				else snapShotSemver.append(".a"); break
+			default:
+				if (!(""+c).matches("\\d")) throw illegalVersionFormatException()
+				snapShotSemver.append(c); break
+		}
+	}
+	return snapShotSemver.toString()
+}
+
+static def betaOrRcToSemver(baseVersion, i) {
+	++i
+	def endPre = i + 3
+	if (baseVersion.substring(i, endPre) == "pre") return blindReplace(baseVersion, i, endPre, "beta.")
+	else {
+		def endRc = i + 2
+		if (baseVersion.substring(i, endRc) == "rc") return blindReplace(baseVersion, i, endRc, "rc.")
+		else throw illegalVersionFormatException()
+	}
+}
+
+static def blindReplace(string, start, end, replacement) {
+	return string.substring(0, start) + replacement + string.substring(end)
+}
+
+static def illegalVersionFormatException() {
+	return new IllegalStateException("Illegal version format!")
+}
+
 def readFileFirstLine(String fileName) {
 	def firstLine = null
 	file(fileName).withReader { reader ->
@@ -151,8 +273,8 @@ def readFileFirstLine(String fileName) {
 	return firstLine
 }
 
-def readRecentChanges() {
-	def newVersionLineRegex = "^(- \\d+\\.\\d+(?:\\.\\d+(?:-[\\da-z]+)?)?" + " \\(\\d{1,2} [A-Z][a-z]{2}\\.? 2021\\): )" + "(.*)"
+def getRecentChanges(int versionsToRead) {
+	def newVersionLineRegex = "^- (\\d+\\.\\d+(?:\\.\\d+)?(?:-[\\d+a-z]+)?)" + "( \\(\\d{1,2} [A-Z][a-z]{2}\\.? 2021\\):)" + "(.*)"
 	Pattern newVersionLinePattern = Pattern.compile(newVersionLineRegex)
 
 	def changelogFile = file("CHANGELOG.md")
@@ -167,18 +289,26 @@ def readRecentChanges() {
 				if (line.matches(newVersionLineRegex)) {
 					Matcher lineMatcher = newVersionLinePattern.matcher(line)
 					lineMatcher.find()
-					if (!lineMatcher.group(1).startsWith(project.mod_version, 2))
+					if (!lineMatcher.group(1).startsWith(project.mod_version))
 						throw new Exception("Version on first line of changelog doesn't match mod_version. ")
-					def trimmedLine = lineMatcher.group(2)
-					if (!trimmedLine.isEmpty())changes += trimmedLine + "\n\n"
+					def trimmedLine = lineMatcher.group(3)
+					if (!trimmedLine.isEmpty()) changes += trimmedLine + "\n"
 				} else throw new Exception("First line of changelog is not new version line. ")
-			} else if (!line.matches(newVersionLineRegex)) {
-				changes += line + "\n\n"
-			} else break
+			} else {
+				if (line.matches(newVersionLineRegex)) {
+					if (versionsToRead > 1) {
+						versionsToRead--
+
+						Matcher lineMatcher = newVersionLinePattern.matcher(line)
+						lineMatcher.find()
+						changes += "\nFrom " + (lineMatcher.group(1) + ":" + lineMatcher.group(3)) + "\n"
+					} else break
+				} else changes += line + "\n"
+			}
 		}
 	}
 
-	changes += "\n\nA cumulative changelog can be found [here](https://gitlab.com/supersaiyansubtlety/${project.ext.mod_id}/-/blob/master/CHANGELOG.md)"
+	changes += "\nA cumulative changelog can be found [here](https://gitlab.com/supersaiyansubtlety/${project.ext.mod_id}/-/blob/master/CHANGELOG.md)"
 
 	return changes
 }
@@ -194,9 +324,15 @@ curseforge {
 			addGameVersion "Fabric"
 
 			changelogType = "markdown"
-			changelog = readRecentChanges()
+
+			def versionsToRead
+			if (project.hasProperty('numVersions')) versionsToRead = Integer.parseInt(project.numVersions)
+			else versionsToRead = 1
+
+			changelog = getRecentChanges(versionsToRead)
 			relations {
 				requiredDependency "fabric-api"
+				requiredDependency "cloth-config"
 			}
 			mainArtifact(remapJar.archivePath) { }
 
@@ -206,17 +342,19 @@ curseforge {
 		}
 	}
 	options {
+		debug = false
 		forgeGradleIntegration = false
 		javaVersionAutoDetect = false
 	}
 }
 
 task modrinth(type: TaskModrinthUpload) {
-	token = readFileFirstLine("..\\MODRINTH_TOKEN.secret") // Use an environment property!
+	token = readFileFirstLine("..\\MODRINTH_TOKEN.secret")
 	projectId = project.modrinth_id
 	versionNumber = project.version
 	uploadFile = remapJar.archivePath // This is the java jar task
-	changelog = readRecentChanges()
+	if (project.hasProperty('numVersions')) changelog = getRecentChanges(Integer.parseInt(project.numVersions))
+	else changelog = getRecentChanges(1)
 	project.ext.minecraft_version_list.each { String game_version -> addGameVersion(game_version) }
 	addLoader('fabric')
 }
@@ -225,3 +363,7 @@ task publishMod {
 	dependsOn = ["modrinth", "curseforge"]
 }
 
+task printRecentChanges {
+	if (project.hasProperty('numVersions')) println getRecentChanges(Integer.parseInt(numVersions))
+	else println getRecentChanges(1)
+}

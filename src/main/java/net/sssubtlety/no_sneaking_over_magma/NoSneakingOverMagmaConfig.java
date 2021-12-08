@@ -1,7 +1,8 @@
 package net.sssubtlety.no_sneaking_over_magma;
 
-import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
-import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
+
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
 
 @Config(name = "no_sneaking_over_magma")
 public class NoSneakingOverMagmaConfig implements ConfigData {
