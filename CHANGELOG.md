@@ -1,3 +1,4 @@
+- 1.0.11 (12 Dec. 2021): Marked as compatible with 1.18.1
 - 1.0.10 (8 Dec. 2021): Updated for 1.18!
 - 1.0.9 (8 Dec. 2021): 
 
