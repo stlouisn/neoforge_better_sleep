@@ -178,7 +178,7 @@ processResources {
 
 				"fabric_api_version": project.fabric_api_version,
 				"min_fabric_api_version": project.min_fabric_api_version,
-				"cloth_config_version": project.cloth_config_version,
+				"min_cloth_config_version": project.min_cloth_config_version,
 				"modmenu_version": project.modmenu_version,
 		])
 	}
