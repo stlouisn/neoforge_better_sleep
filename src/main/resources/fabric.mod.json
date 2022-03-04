@@ -32,13 +32,8 @@
     "${mod_id}.mixins.json"
   ],
 
-  "depends": {
-    "fabricloader": ">=${min_loader_version}",
-    "fabric": ">=${min_fabric_api_version}",
-    "minecraft": ">=${min_minecraft_version} <=${minecraft_version}",
-    "cloth-config2": ">=${min_cloth_config_version}"
+  "depends": {${depends}
   },
-  "recommends": {
-    "modmenu": ">=${modmenu_version}"
+  "suggests": {${suggests}
   }
 }

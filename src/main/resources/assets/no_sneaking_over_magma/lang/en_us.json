@@ -1,7 +1,15 @@
 {
+  "text.no_sneaking_over_magma.name": "No Sneaking Over Magma!",
+
   "text.autoconfig.no_sneaking_over_magma.title": "No Sneaking Over Magma! Configuration",
   "text.autoconfig.no_sneaking_over_magma.option.sneakingProtectsOnMagma": "Sneaking protects from magma",
   "text.autoconfig.no_sneaking_over_magma.option.frostWalkerProtectsOnMagma": "Frostwalker protects from magma",
   "text.autoconfig.no_sneaking_over_magma.option.magmaDamagesNonLivingEntities": "Magma damages non-living entities",
-  "text.autoconfig.no_sneaking_over_magma.option.magmaSetsFireToEntities": "Magma sets fire to entities"
+  "text.autoconfig.no_sneaking_over_magma.option.magmaSetsFireToEntities": "Magma sets fire to entities",
+
+  "text.autoconfig.no_sneaking_over_magma.option.fetch_translation_updates": "Download translation updates",
+  "text.autoconfig.no_sneaking_over_magma.option.fetch_translation_updates.@Tooltip": "Download translations from Crowdin when the game launches",
+
+  "text.no_sneaking_over_magma.no_config_screen.title": "${name} Configuration Unavailable",
+  "text.no_sneaking_over_magma.no_config_screen.message": "§cInstall Cloth Config to enable configuration."
 }
