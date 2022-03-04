@@ -6,11 +6,12 @@ import net.fabricmc.api.ModInitializer;
 
 public class NoSneakingOverMagma {
     public static final String NAMESPACE = "no_sneaking_over_magma";
+    public static final Util.TranslatableString NAME = new Util.TranslatableString("text." + NAMESPACE + ".name");
 
     public static class Init implements ModInitializer {
         @Override
         public void onInitialize() {
-            NoSneakingOverMagmaConfig.init();
+            FeatureControl.init();
         }
     }
 

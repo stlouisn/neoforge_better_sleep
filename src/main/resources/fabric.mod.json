@@ -25,7 +25,7 @@
       "${maven_group}.${mod_id}.${ModId}\$ClientInit"
     ],
     "modmenu": [
-      "${maven_group}.${mod_id}.${ModId}ModMenuIntegration"
+      "${maven_group}.${mod_id}.ModMenuIntegration"
     ]
   },
   "mixins": [
