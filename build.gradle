@@ -19,7 +19,7 @@ dependencies {
 	// Config menu support
 	suggestedMod true, "com.terraformersmc:modmenu:", "modmenu"
 	// translation fetching
-	bundledMod "de.guntram.mcmod:crowdin-translate:$project.crowdin_translate_version"
+//	bundledMod "de.guntram.mcmod:crowdin-translate:$project.crowdin_translate_version"
 
 	// speed up launching in dev
 	devRuntime "com.github.astei:lazydfu:$project.lazy_dfu_version"
