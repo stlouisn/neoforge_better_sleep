@@ -1,3 +1,10 @@
+- 1.0.12 (4 Mar. 2022):
+  
+  - Updated for 1.18.2
+  - Removed Crowdin Translate until it updates for 1.18.2
+  - Cloth config is now optional (and autocofig needn't be installed separately)
+  - Changed config names, so you'll need to re-set any configs you changed
+
 - 1.0.11 (12 Dec. 2021): Marked as compatible with 1.18.1
 - 1.0.10 (8 Dec. 2021): Updated for 1.18!
 - 1.0.9 (8 Dec. 2021): 
