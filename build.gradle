@@ -1,4 +1,16 @@
 //file:noinspection GroovyAssignabilityCheck
+buildscript {
+	dependencies {
+		classpath "de.guntram.mcmod:crowdin-translate:$crowdin_translate_version"
+	}
+	repositories {
+		maven {
+			name = 'CrowdinTranslate source'
+			url = "https://minecraft.guntram.de/maven/"
+		}
+	}
+}
+
 plugins {
 	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
@@ -15,15 +27,15 @@ dependencies {
 	dependedMod "net.fabricmc.fabric-api:fabric-api:", "fabric", null, null
 
 	//Config library
-	suggestedMod false, "me.shedaniel.cloth:cloth-config-fabric:", "cloth-config"
+	suggestedMod true, "me.shedaniel.cloth:cloth-config-fabric:", "cloth-config"
 	// Config menu support
 	suggestedMod true, "com.terraformersmc:modmenu:", "modmenu"
 	// translation fetching
-//	bundledMod "de.guntram.mcmod:crowdin-translate:$project.crowdin_translate_version"
+	bundledMod "de.guntram.mcmod:crowdin-translate:$project.crowdin_translate_version"
 
 	// speed up launching in dev
 	devRuntime "com.github.astei:lazydfu:$project.lazy_dfu_version"
-	devRuntime "net.oskarstrom:DashLoader:$project.dashloader_version"
+//	devRuntime "net.oskarstrom:DashLoader:$project.dashloader_version"
 
 	// remember window size+pos in dev
 	devRuntime "net.dblsaiko:winwonders:$project.winwonders_version"
