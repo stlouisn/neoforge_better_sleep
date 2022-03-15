@@ -1,3 +1,8 @@
+- 1.0.13 (15 Mar. 2022):
+  
+  - reduced minimum required Fabric API version
+  - Bundled new 1.18.2 Crowdin Translate so translations can be updated when the game launches
+
 - 1.0.12 (4 Mar. 2022):
   
   - Updated for 1.18.2
