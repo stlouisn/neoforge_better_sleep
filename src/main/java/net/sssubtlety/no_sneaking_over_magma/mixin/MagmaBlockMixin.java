@@ -35,14 +35,14 @@ public abstract class MagmaBlockMixin extends Block {
 //	}
 
 	@ModifyArg(method = "onSteppedOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;hasFrostWalker(Lnet/minecraft/entity/LivingEntity;)Z"))
-	private LivingEntity tryIgnoreFrostWalker(LivingEntity entity) {
+	private LivingEntity no_sneaking_over_magma$tryIgnoreFrostWalker(LivingEntity entity) {
 		if (!shouldFrostWalkerProtectFromMagma() && hasFrostWalker(entity)) {
-			return getDummyLivingEntity(entity);
+			return no_sneaking_over_magma$getDummyLivingEntity(entity);
 		} else return entity;
 	}
 
 	@Inject(method = "onSteppedOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
-	private void trySetFire(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
+	private void no_sneaking_over_magma$trySetFire(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
 		if (shouldMagmaSetFireToEntities()) entity.setOnFireFor(FIRE_DURATION);
 	}
 
@@ -52,14 +52,14 @@ public abstract class MagmaBlockMixin extends Block {
 			ordinal = 0,
 			shift = At.Shift.AFTER
 	))
-	private void tryIgnoreFrostWalkerAndSetFire(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
+	private void no_sneaking_over_magma$tryIgnoreFrostWalkerAndSetFire(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
 		if (!(entity instanceof LivingEntity) && shouldMagmaDamageNonLivingEntities()) {
 			entity.damage(DamageSource.HOT_FLOOR, 1.0F);
 			if (shouldMagmaSetFireToEntities()) entity.setOnFireFor(FIRE_DURATION);
 		}
 	}
 
-	private LivingEntity getDummyLivingEntity(LivingEntity livingEntity) {
+	private LivingEntity no_sneaking_over_magma$getDummyLivingEntity(LivingEntity livingEntity) {
 		if (DUMMY_LIVING_ENTITY == null) DUMMY_LIVING_ENTITY = new DummyLivingEntity(livingEntity.world);
 		else DUMMY_LIVING_ENTITY.world = livingEntity.world;
 

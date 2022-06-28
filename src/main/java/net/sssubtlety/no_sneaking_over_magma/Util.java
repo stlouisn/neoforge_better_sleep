@@ -5,7 +5,6 @@ import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.VersionParsingException;
 import net.fabricmc.loader.api.metadata.version.VersionPredicate;
 import net.minecraft.client.resource.language.I18n;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
@@ -23,7 +22,7 @@ public final class Util {
     public static Text replace(Text text, String regex, String replacement) {
         String string = text.getString();
         string = string.replaceAll(regex, replacement);
-        return new LiteralText(string).setStyle(text.getStyle());
+        return Text.translatable(string).setStyle(text.getStyle());
     }
 
     record TranslatableString(String key) {

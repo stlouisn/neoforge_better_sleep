@@ -13,11 +13,11 @@ import static net.sssubtlety.no_sneaking_over_magma.FeatureControl.shouldSneakin
 
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @Shadow public abstract BlockPos getLandingPos();
+    @Shadow public abstract BlockPos method_23312();
 
     @Inject(method = "bypassesSteppingEffects", at = @At("HEAD"), cancellable = true)
-    private void preventMagmaBypass(CallbackInfoReturnable<Boolean> cir) {
-        if(!shouldSneakingProtectFromMagma() && ((Entity)(Object)this).world.getBlockState(this.getLandingPos()).getBlock() instanceof MagmaBlock) {
+    private void no_sneaking_over_magma$preventMagmaBypass(CallbackInfoReturnable<Boolean> cir) {
+        if(!shouldSneakingProtectFromMagma() && ((Entity)(Object)this).world.getBlockState(this.method_23312()).getBlock() instanceof MagmaBlock) {
             cir.setReturnValue(false);
         }
     }
