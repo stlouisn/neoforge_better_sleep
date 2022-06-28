@@ -1,3 +1,4 @@
+- 1.0.14 (28 Jun. 2022): Updated for 1.19!
 - 1.0.13 (15 Mar. 2022):
   
   - reduced minimum required Fabric API version
