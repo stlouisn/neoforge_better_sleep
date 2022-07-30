@@ -1,0 +1,7 @@
+{
+  "text.autoconfig.no_sneaking_over_magma.title": "Configuración No Sneaking Over Magma!",
+  "text.autoconfig.no_sneaking_over_magma.option.sneakingProtectsOnMagma": "Agacharse te protege del magma",
+  "text.autoconfig.no_sneaking_over_magma.option.frostWalkerProtectsOnMagma": "Paso helado te protege del magma",
+  "text.autoconfig.no_sneaking_over_magma.option.magmaDamagesNonLivingEntities": "El magma daña las entidades no vivas",
+  "text.autoconfig.no_sneaking_over_magma.option.magmaSetsFireToEntities": "El magma prende fuego a las entidades"
+}

@@ -1,0 +1,7 @@
+{
+  "text.autoconfig.no_sneaking_over_magma.title": "Sem Esgueirar-se sobre o Magma! Configuração",
+  "text.autoconfig.no_sneaking_over_magma.option.sneakingProtectsOnMagma": "Esgueirar-se te protege contra magma",
+  "text.autoconfig.no_sneaking_over_magma.option.frostWalkerProtectsOnMagma": "Passos gelados te protegem contra magma",
+  "text.autoconfig.no_sneaking_over_magma.option.magmaDamagesNonLivingEntities": "Magma damages non-living entities",
+  "text.autoconfig.no_sneaking_over_magma.option.magmaSetsFireToEntities": "Magma sets fire to entities"
+}
