@@ -1,7 +1,7 @@
 {
-  "text.autoconfig.no_sneaking_over_magma.title": "No Sneaking Over Magma! Configuration",
-  "text.autoconfig.no_sneaking_over_magma.option.sneakingProtectsOnMagma": "Sneaking protects from magma",
-  "text.autoconfig.no_sneaking_over_magma.option.frostWalkerProtectsOnMagma": "Frostwalker protects from magma",
-  "text.autoconfig.no_sneaking_over_magma.option.magmaDamagesNonLivingEntities": "Magma damages non-living entities",
-  "text.autoconfig.no_sneaking_over_magma.option.magmaSetsFireToEntities": "Magma sets fire to entities"
+  "text.autoconfig.no_sneaking_over_magma.title": "“No Sneaking Over Magma!”配置",
+  "text.autoconfig.no_sneaking_over_magma.option.sneakingProtectsOnMagma": "潜行能避免岩浆块的烧伤",
+  "text.autoconfig.no_sneaking_over_magma.option.frostWalkerProtectsOnMagma": "冰霜行者能避免岩浆块的烧伤",
+  "text.autoconfig.no_sneaking_over_magma.option.magmaDamagesNonLivingEntities": "岩浆块会伤害非生物实体",
+  "text.autoconfig.no_sneaking_over_magma.option.magmaSetsFireToEntities": "岩浆块会点燃实体"
 }
