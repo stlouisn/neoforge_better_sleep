@@ -5,7 +5,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.MagmaBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.sssubtlety.no_sneaking_over_magma.DummyLivingEntity;
@@ -54,7 +53,7 @@ public abstract class MagmaBlockMixin extends Block {
 	))
 	private void no_sneaking_over_magma$tryIgnoreFrostWalkerAndSetFire(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
 		if (!(entity instanceof LivingEntity) && shouldMagmaDamageNonLivingEntities()) {
-			entity.damage(DamageSource.HOT_FLOOR, 1.0F);
+			entity.damage(world.getDamageSources().hotFloor(), 1.0F);
 			if (shouldMagmaSetFireToEntities()) entity.setOnFireFor(FIRE_DURATION);
 		}
 	}
