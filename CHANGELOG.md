@@ -1,3 +1,4 @@
+- 1.0.18 (14 Jun. 2023): Updated for 1.20 and 1.20.1!
 - 1.0.17 (20 Mar. 2023): Updated for 1.19.4
 - 1.0.16 (7 Aug. 2022): Marked as compatible with 1.19.2
 - 1.0.15 (29 Jul. 2022): Marked as compatible with 1.19.1
