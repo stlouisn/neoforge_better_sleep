@@ -17,7 +17,7 @@ public abstract class EntityMixin {
 
     @Inject(method = "bypassesSteppingEffects", at = @At("HEAD"), cancellable = true)
     private void no_sneaking_over_magma$preventMagmaBypass(CallbackInfoReturnable<Boolean> cir) {
-        if(!shouldSneakingProtectFromMagma() && ((Entity)(Object)this).world.getBlockState(this.getSteppingPosition()).getBlock() instanceof MagmaBlock) {
+        if(!shouldSneakingProtectFromMagma() && ((Entity)(Object)this).getWorld().getBlockState(this.getSteppingPosition()).getBlock() instanceof MagmaBlock) {
             cir.setReturnValue(false);
         }
     }

@@ -59,8 +59,8 @@ public abstract class MagmaBlockMixin extends Block {
 	}
 
 	private LivingEntity no_sneaking_over_magma$getDummyLivingEntity(LivingEntity livingEntity) {
-		if (DUMMY_LIVING_ENTITY == null) DUMMY_LIVING_ENTITY = new DummyLivingEntity(livingEntity.world);
-		else DUMMY_LIVING_ENTITY.world = livingEntity.world;
+		if (DUMMY_LIVING_ENTITY == null) DUMMY_LIVING_ENTITY = new DummyLivingEntity(livingEntity.getWorld());
+		else DUMMY_LIVING_ENTITY.setWorld(livingEntity.getWorld());
 
 		return DUMMY_LIVING_ENTITY;
 	}

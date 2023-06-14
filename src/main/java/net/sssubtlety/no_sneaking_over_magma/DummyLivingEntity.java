@@ -33,4 +33,9 @@ public class DummyLivingEntity extends LivingEntity {
     public Arm getMainArm() {
         return Arm.RIGHT;
     }
+
+    @Override
+    public void setWorld(World world) {
+        super.setWorld(world);
+    }
 }
