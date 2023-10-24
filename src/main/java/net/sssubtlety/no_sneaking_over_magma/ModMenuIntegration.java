@@ -36,7 +36,7 @@ public class ModMenuIntegration implements ModMenuApi {
 
         @Override
         public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-            renderBackground(graphics);
+            renderBackgroundTexture(graphics);
             super.render(graphics, mouseX, mouseY, delta);
             final int windowHCenter = MinecraftClient.getInstance().getWindow().getScaledWidth() / 2;
             final int windowHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
