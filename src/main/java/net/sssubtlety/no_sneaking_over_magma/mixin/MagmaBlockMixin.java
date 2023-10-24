@@ -31,7 +31,7 @@ public abstract class MagmaBlockMixin extends Block {
 	}
 
 	@Inject(method = "onSteppedOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))
-	private void trySetFire(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
+	private void trySetFireToLivingEntities(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
 		if (shouldMagmaSetFireToEntities()) entity.setOnFireFor(FIRE_DURATION);
 	}
 
