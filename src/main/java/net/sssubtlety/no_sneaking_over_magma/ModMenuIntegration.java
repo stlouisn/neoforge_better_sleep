@@ -10,6 +10,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 import static net.sssubtlety.no_sneaking_over_magma.FeatureControl.isConfigLoaded;
 import static net.sssubtlety.no_sneaking_over_magma.NoSneakingOverMagma.NAMESPACE;
@@ -23,8 +24,8 @@ public class ModMenuIntegration implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return isConfigLoaded() ?
-                parent -> AutoConfig.getConfigScreen(Config.class, parent).get() :
-                NoConfigScreen::new;
+            parent -> AutoConfig.getConfigScreen(Config.class, parent).get() :
+            NoConfigScreen::new;
     }
 
     public static class NoConfigScreen extends Screen {
@@ -36,23 +37,22 @@ public class ModMenuIntegration implements ModMenuApi {
 
         @Override
         public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-            renderBackgroundTexture(graphics);
             super.render(graphics, mouseX, mouseY, delta);
             final int windowHCenter = MinecraftClient.getInstance().getWindow().getScaledWidth() / 2;
             final int windowHeight = MinecraftClient.getInstance().getWindow().getScaledHeight();
 
             graphics.drawCenteredShadowedText(
-                    MinecraftClient.getInstance().textRenderer,
-                    Util.replace(NO_CONFIG_SCREEN_TITLE, "\\$\\{name\\}", NoSneakingOverMagma.NAME.get()),
-                    windowHCenter, windowHeight / 10,
-                    Util.getRgb(NO_CONFIG_SCREEN_MESSAGE)
+                this.textRenderer,
+                Util.replace(NO_CONFIG_SCREEN_TITLE, "\\$\\{name\\}", NoSneakingOverMagma.NAME.getString()),
+                windowHCenter, windowHeight / 10,
+                Formatting.WHITE.getColorValue()
             );
 
             graphics.drawCenteredShadowedText(
-                    MinecraftClient.getInstance().textRenderer,
-                    NO_CONFIG_SCREEN_MESSAGE,
-                    windowHCenter, windowHeight / 2,
-                    Util.getRgb(NO_CONFIG_SCREEN_MESSAGE)
+                this.textRenderer,
+                NO_CONFIG_SCREEN_MESSAGE,
+                windowHCenter, windowHeight / 2,
+                Formatting.RED.getColorValue()
             );
         }
 

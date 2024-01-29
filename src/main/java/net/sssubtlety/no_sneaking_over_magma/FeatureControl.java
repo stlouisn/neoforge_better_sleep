@@ -10,24 +10,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
+import static net.sssubtlety.no_sneaking_over_magma.Util.isModLoaded;
+
 public class FeatureControl {
     private static final @Nullable Config CONFIG_INSTANCE;
 
     static {
-        boolean shouldLoadConfig = false;
-
-        final Optional<ModContainer> optModContainer = FabricLoader.getInstance().getModContainer("cloth-config");
-        if (optModContainer.isPresent()){
-            try {
-                shouldLoadConfig = VersionPredicate.parse(">=6.1.48").test(optModContainer.get().getMetadata().getVersion());
-            } catch (VersionParsingException e) {
-                e.printStackTrace();
-            }
-        }
-
-        CONFIG_INSTANCE = shouldLoadConfig ?
-                AutoConfig.register(Config.class, GsonConfigSerializer::new).getConfig() : null;
-
+        CONFIG_INSTANCE = isModLoaded("cloth-config", ">=6.1.48") ?
+            AutoConfig.register(Config.class, GsonConfigSerializer::new).getConfig() : null;
     }
 
     public interface Defaults {
