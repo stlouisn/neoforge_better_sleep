@@ -12,12 +12,12 @@ buildscript {
 }
 
 plugins {
-	id 'fabric-loom' version '1.0-SNAPSHOT'
+	id 'fabric-loom' version '1.5-SNAPSHOT'
 	id 'maven-publish'
 	// Quilt mappings
 	id 'org.quiltmc.quilt-mappings-on-loom' version '4.2.0'
 	// Quiltflower for decompiling Minecraft
-	id 'io.github.juuxel.loom-quiltflower' version '1.7.2'
+//	id 'io.github.juuxel.loom-quiltflower' version '1.7.2'
 }
 
 apply from: "https://gitlab.com/supersaiyansubtlety/mod_gradle_scripts/-/raw/$project.mod_gradle_scripts_ref/applyAll.gradle"
