@@ -23,8 +23,6 @@ plugins {
 apply from: "https://gitlab.com/supersaiyansubtlety/mod_gradle_scripts/-/raw/$project.mod_gradle_scripts_ref/applyAll.gradle"
 
 dependencies {
-	include(implementation(annotationProcessor("com.github.llamalad7.mixinextras:mixinextras-fabric:$project.mixin_extras_version")))
-
 	// Fabric API
 	dependedMod "net.fabricmc.fabric-api:fabric-api:", "fabric", null, null
 
@@ -35,6 +33,7 @@ dependencies {
 	// translation fetching
 	bundledMod "de.guntram.mcmod:crowdin-translate:$project.crowdin_translate_version"
 
-	// remember window size+pos in dev
+	// dev convenience
 	devRuntime "net.dblsaiko:winwonders:$project.winwonders_version"
+	devRuntime "maven.modrinth:global-options:$project.global_options_version"
 }
