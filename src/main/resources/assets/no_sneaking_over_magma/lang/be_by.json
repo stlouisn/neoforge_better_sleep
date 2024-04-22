@@ -1,0 +1,7 @@
+{
+  "text.autoconfig.no_sneaking_over_magma.title": "Канфігурацыя No Sneaking Over Magma!",
+  "text.autoconfig.no_sneaking_over_magma.option.sneakingProtectsOnMagma": "Прысяданне абараняе ад магмы",
+  "text.autoconfig.no_sneaking_over_magma.option.frostWalkerProtectsOnMagma": "Марозны поступ абараняе ад магмы",
+  "text.autoconfig.no_sneaking_over_magma.option.magmaDamagesNonLivingEntities": "Магма наносіць шкоду нежывым істотам",
+  "text.autoconfig.no_sneaking_over_magma.option.magmaSetsFireToEntities": "Магма падпальвае істоты"
+}

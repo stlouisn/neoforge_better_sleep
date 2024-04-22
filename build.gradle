@@ -3,19 +3,20 @@ buildscript {
 	dependencies {
 		classpath "de.guntram.mcmod:crowdin-translate:$crowdin_translate_version"
 	}
+
 	repositories {
 		maven {
 			name = 'CrowdinTranslate source'
-			url = "https://minecraft.guntram.de/maven/"
+			url = 'https://minecraft.guntram.de/maven/'
 		}
 	}
 }
 
 plugins {
-	id 'fabric-loom' version '1.5-SNAPSHOT'
+	id 'fabric-loom' version '1.6-SNAPSHOT'
 	id 'maven-publish'
 	// Quilt mappings
-	id 'org.quiltmc.quilt-mappings-on-loom' version '4.2.0'
+	id 'org.quiltmc.quilt-mappings-on-loom' version '4.2.3'
 	// Quiltflower for decompiling Minecraft
 //	id 'io.github.juuxel.loom-quiltflower' version '1.7.2'
 }
