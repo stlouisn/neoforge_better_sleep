@@ -1,3 +1,4 @@
+- 1.0.21 (23 Apr. 2024): Marked as compatible with 1.20.5
 - 1.0.20 (29 Jan. 2024):
   - Marked as compatible with 1.20.3 and 1.20.4
   - Minor internal changes
