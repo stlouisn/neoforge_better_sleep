@@ -2,13 +2,7 @@ package net.sssubtlety.no_sneaking_over_magma;
 
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.ModContainer;
-import net.fabricmc.loader.api.VersionParsingException;
-import net.fabricmc.loader.api.metadata.version.VersionPredicate;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
 
 import static net.sssubtlety.no_sneaking_over_magma.Util.isModLoaded;
 

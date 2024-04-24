@@ -4,10 +4,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.VersionParsingException;
 import net.fabricmc.loader.api.metadata.version.VersionPredicate;
-import net.minecraft.client.resource.language.I18n;
 import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
-import net.minecraft.util.Formatting;
 
 import java.util.Optional;
 
@@ -20,7 +17,7 @@ public final class Util {
 
     public static boolean isModLoaded(String id, String versionPredicate) {
         final Optional<ModContainer> optModContainer = FabricLoader.getInstance().getModContainer(id);
-        if (optModContainer.isPresent()){
+        if (optModContainer.isPresent()) {
             try {
                 return VersionPredicate.parse(versionPredicate).test(optModContainer.get().getMetadata().getVersion());
             } catch (VersionParsingException e) {
