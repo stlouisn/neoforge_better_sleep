@@ -17,11 +17,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static net.sssubtlety.no_sneaking_over_magma.FeatureControl.*;
 
 @Mixin(MagmaBlock.class)
-public abstract class MagmaBlockMixin extends Block {
+abstract class MagmaBlockMixin extends Block {
 	@Unique private static final int FIRE_DURATION = 1;
 
-	private MagmaBlockMixin(Settings settings) {
-		super(settings);
+	private MagmaBlockMixin() {
+        //noinspection DataFlowIssue
+        super(null);
 		throw new IllegalStateException("MagmaBlockMixin's dummy constructor called!");
 	}
 

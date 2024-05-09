@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import static net.sssubtlety.no_sneaking_over_magma.FeatureControl.shouldSneakingProtectFromMagma;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin {
+abstract class EntityMixin {
 
     @Shadow public abstract BlockPos getLandingPosition();
 

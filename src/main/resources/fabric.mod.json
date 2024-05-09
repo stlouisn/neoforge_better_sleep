@@ -9,12 +9,21 @@
     "${author}"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/${archives_base_name}",
-    "sources": "https://gitlab.com/${author}/${mod_id}"
+    "homepage": "https://modrinth.com/mod/${archives_base_name}",
+    "sources": "https://gitlab.com/${author}/${mod_id}",
+    "issues": "https://gitlab.com/${author}/${mod_id}/-/issues"
   },
 
-  "license": "https://will-lucic.mit-license.org/",
-  "icon": "assets/${mod_id}/${mod_id}_icon.png",
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.discord": "https://discord.gg/xABmPngXAH"
+      }
+    }
+  },
+
+  "license": "MIT",
+  "icon": "assets/${mod_id}/icon.png",
 
   "environment": "*",
   "entrypoints": {
