@@ -65,7 +65,7 @@ and configuring the mod in-game requires [Mod Menu](https://modrinth.com/mod/mod
 
 <summary>Translating</summary>
 
-If you'd like to translate No Sneaking Over Magma, follow [this link](https://crwd.in/no_sneaking_over_magma).
+If you'd like to help translate No Sneaking Over Magma, you can do so on [Crowdin](https://crwd.in/no-sneaking-over-magma).
 
 New translations will be added once approved without the mod needing an update thanks to [CrowdinTranslate](https://github.com/gbl/CrowdinTranslate).
 
