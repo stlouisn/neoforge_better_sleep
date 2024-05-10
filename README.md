@@ -19,7 +19,7 @@ Like this mod?
 <a href="https://quiltmc.org/"><img width=100 style="vertical-align:middle" src="https://raw.githubusercontent.com/QuiltMC/art/master/brand/1024png/quilt_available_dark.png" alt="Mod loader Fabric"></a>
 
 <a href="https://discord.gg/xABmPngXAH"><img style="vertical-align:middle" src="https://img.shields.io/discord/1006391289006280746?label=discuss&logo=discord" alt="Discuss on Discord"></a>
-<a href="https://will-lucic.mit-license.org/"><img style="vertical-align:middle" src="https://img.shields.io/badge/license-MIT-green" alt="License MIT"></a>
+<a href="https://gitlab.com/supersaiyansubtlety/no_sneaking_over_magma/-/blob/master/LICENSE"><img style="vertical-align:middle" src="https://img.shields.io/badge/license-MIT-green" alt="License MIT"></a>
 <a href="https://gitlab.com/supersaiyansubtlety/no_sneaking_over_magma"><img style="vertical-align:middle" src="https://img.shields.io/badge/source%20on-gitlab-fc6e26?logo=gitlab" alt="Source Code on GitLab"></a>
 <a href="https://gitlab.com/supersaiyansubtlety/no_sneaking_over_magma/-/issues"><img style="vertical-align:middle" src="https://img.shields.io/gitlab/issues/open-raw/supersaiyansubtlety/no_sneaking_over_magma?label=issues&logo=gitlab" alt="gitlab issues"></a>
 
@@ -73,6 +73,6 @@ New translations will be added once approved without the mod needing an update t
 
 ---
 
-This mod is only for Fabric (works on Quilt, too!) and I won't be porting it to Forge. The license is [MIT](https://will-lucic.mit-license.org/), however, so anyone else is free to port it.
+This mod is only for Fabric (works on Quilt, too!) and I won't be porting it to Forge. The license is MIT, however, so anyone else is free to port it.
 
 I'd appreciate links back to this page if you port or otherwise modify this project, but links aren't required.
