@@ -1,7 +1,6 @@
 {
   "text.no_sneaking_over_magma.name": "No Sneaking Over Magma!",
 
-  "modmenu.nameTranslation.no_sneaking_over_magma": "No Sneaking Over Magma!",
   "modmenu.summaryTranslation.no_sneaking_over_magma": "Magma hurts even while crouching",
   "modmenu.descriptionTranslation.no_sneaking_over_magma": "Makes magma deal damage even when players are crouching, with plenty of configs.",
 
