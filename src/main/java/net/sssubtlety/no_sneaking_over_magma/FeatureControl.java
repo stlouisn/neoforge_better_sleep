@@ -19,7 +19,6 @@ public class FeatureControl {
         boolean frost_walker_protects_from_magma = true;
         boolean magma_damages_non_living_entities = false;
         boolean magma_sets_fire_to_entities = false;
-        boolean fetch_translation_updates = true;
     }
 
     public static boolean shouldSneakingProtectFromMagma() {
@@ -36,10 +35,6 @@ public class FeatureControl {
 
     public static boolean shouldMagmaSetFireToEntities() {
         return CONFIG_INSTANCE == null ? Defaults.magma_sets_fire_to_entities : CONFIG_INSTANCE.magma_sets_fire_to_entities;
-    }
-
-    public static boolean shouldFetchTranslationUpdates() {
-        return CONFIG_INSTANCE == null ? Defaults.fetch_translation_updates : CONFIG_INSTANCE.fetch_translation_updates;
     }
 
     public static boolean isConfigLoaded() {

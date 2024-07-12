@@ -13,5 +13,9 @@ pluginManagement {
             name = 'Cotton'
             url = 'https://server.bbkr.space/artifactory/libs-release/'
         }
+        maven {
+            name = 'crowdin_translate_maven'
+            url = 'https://gitlab.com/api/v4/projects/59105494/packages/maven'
+        }
     }
 }

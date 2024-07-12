@@ -19,6 +19,10 @@
       "links": {
         "modmenu.discord": "https://discord.gg/xABmPngXAH"
       }
+    },
+    "sss_translate": {
+      "crowdin_project_name": "${archives_base_name}",
+      "minecraft_project_name": "${mod_id}"
     }
   },
 
@@ -29,9 +33,6 @@
   "entrypoints": {
     "main": [
       "${maven_group}.${mod_id}.Init"
-    ],
-    "client": [
-      "${maven_group}.${mod_id}.ClientInit"
     ],
     "modmenu": [
       "${maven_group}.${mod_id}.ModMenuIntegration"
@@ -48,6 +49,7 @@
   },
   "suggests": {
     "modmenu": ">=${modmenu_version}",
-    "cloth-config2": ">=${cloth_config_version}"
+    "cloth-config2": ">=${cloth_config_version}",
+    "sss_translate": "*"
   }
 }

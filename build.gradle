@@ -1,25 +1,25 @@
 //file:noinspection GroovyAssignabilityCheck
-buildscript {
-	dependencies {
-		classpath "de.guntram.mcmod:crowdin-translate:$crowdin_translate_version"
-	}
-
-	repositories {
-		maven {
-			name = 'CrowdinTranslate source'
-			url = 'https://minecraft.guntram.de/maven/'
-		}
-	}
-}
-
 plugins {
-	id 'fabric-loom' version '1.6-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
 	// Quilt mappings
 	id 'org.quiltmc.quilt-mappings-on-loom' version '4.2.3'
+    id 'net.sssubtlety.sss_translate.sss-translate' version "$sss_translate_version"
 }
 
 apply from: "https://gitlab.com/supersaiyansubtlety/mod_gradle_scripts/-/raw/$project.mod_gradle_scripts_ref/applyAll.gradle"
+
+sssTranslate {
+	crowdinProjectName = project.ext.archives_base_name
+	minecraftProjectName = project.ext.mod_id
+}
+
+repositories {
+	maven {
+		name = 'sss_translate_maven'
+		url = 'https://gitlab.com/api/v4/projects/59105494/packages/maven'
+	}
+}
 
 dependencies {
 	// Fabric API
@@ -30,7 +30,7 @@ dependencies {
 	// Config menu support
 	suggestedMod true, "com.terraformersmc:modmenu:", "modmenu"
 	// translation fetching
-	bundledMod "de.guntram.mcmod:crowdin-translate:$project.crowdin_translate_version"
+	modRuntimeOnly "net.sssubtlety.sss_translate:mod:$sss_translate_version"
 
 	// dev convenience
 	devRuntime "net.dblsaiko:winwonders:$project.winwonders_version"
