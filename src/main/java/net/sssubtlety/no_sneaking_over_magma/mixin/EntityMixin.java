@@ -15,7 +15,6 @@ import static net.sssubtlety.no_sneaking_over_magma.FeatureControl.shouldSneakin
 
 @Mixin(Entity.class)
 abstract class EntityMixin {
-
     @Shadow public abstract BlockPos getLandingPosition();
 
     @Shadow public abstract World getWorld();

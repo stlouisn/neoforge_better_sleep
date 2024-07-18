@@ -4,8 +4,11 @@
   "package": "net.sssubtlety.no_sneaking_over_magma.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "DamageSourcePredicateMixin",
+    "DamageSourcesMixin",
     "EntityMixin",
-    "MagmaBlockMixin"
+    "MagmaBlockMixin",
+    "SimpleRegistryMixin"
   ],
   "injectors": {
     "defaultRequire": 1
