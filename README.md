@@ -62,9 +62,6 @@ instance folder (`.minecraft/` by default for the vanilla launcher).
 
 - Magma sets fire to entities; default: `false`
 
-- Download translation updates; default: `true`
-  > Download translations from Crowdin when the game launches.
-
 </details>
 
 ---
