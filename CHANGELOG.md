@@ -1,3 +1,9 @@
+- 1.1.0 (17 Jul. 2024):
+  - Updated for 1.21!
+  - Replaced bundled [CrowdinTranslate](<https://github.com/gbl/CrowdinTranslate>) with optional
+    [SSS Translate](<https://modrinth.com/mod/sss-translate>) dependency;
+    install [SSS Translate](<https://modrinth.com/mod/sss-translate>) for automatic translation updates
+  - Moderate internal changes
 - 1.0.22 (9 May 2024):
   - Marked as compatible with 1.20.6
   - Improved [Mod Menu](https://modrinth.com/mod/modmenu) integration
