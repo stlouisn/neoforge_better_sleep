@@ -30,7 +30,7 @@ dependencies {
 	// Config menu support
 	suggestedMod true, "com.terraformersmc:modmenu:", "modmenu"
 	// translation fetching
-	modRuntimeOnly "net.sssubtlety.sss_translate:mod:$sss_translate_version"
+	// modRuntimeOnly "net.sssubtlety.sss_translate:mod:$sss_translate_version"
 
 	// dev convenience
 	devRuntime "net.dblsaiko:winwonders:$project.winwonders_version"
