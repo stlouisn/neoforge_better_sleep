@@ -1,3 +1,4 @@
+- 1.1.1 (4 Sep. 2024): Marked as compatible with 1.21.1
 - 1.1.0 (17 Jul. 2024):
   - Updated for 1.21!
   - Replaced bundled [CrowdinTranslate](<https://github.com/gbl/CrowdinTranslate>) with optional
