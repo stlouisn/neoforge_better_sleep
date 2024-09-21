@@ -16,14 +16,6 @@ public class MagmaBlockMixin extends Block {
     super(settings);
   }
 
-//  @Inject(method = "onSteppedOn", at = @At("HEAD"), cancellable = true)
-//  private void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
-//    if (entity.isAlive()) {
-//      entity.hurt(DamageSource.HOT_FLOOR, 1.0F);
-//    }
-//    ci.cancel();
-//  }
-
   @ModifyExpressionValue(
       method = "onSteppedOn",
       at = @At(
