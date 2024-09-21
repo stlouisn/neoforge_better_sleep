@@ -1,21 +1,10 @@
 pluginManagement {
-    repositories {
-        maven {
-            name = 'Fabric'
-            url = 'https://maven.fabricmc.net/'
-        }
-        gradlePluginPortal()
-        maven {
-            name = 'Quilt'
-            url = 'https://maven.quiltmc.org/repository/release'
-        }
-        maven {
-            name = 'Cotton'
-            url = 'https://server.bbkr.space/artifactory/libs-release/'
-        }
-        maven {
-            name = 'crowdin_translate_maven'
-            url = 'https://gitlab.com/api/v4/projects/59105494/packages/maven'
-        }
-    }
+  repositories {
+    maven { url = "https://maven.fabricmc.net/" }
+    maven { url = "https://maven.architectury.dev/" }
+    maven { url = "https://maven.minecraftforge.net/" }
+    gradlePluginPortal()
+  }
 }
+
+rootProject.name = archives_base_name
