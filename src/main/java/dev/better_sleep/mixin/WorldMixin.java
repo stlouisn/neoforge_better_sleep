@@ -30,7 +30,7 @@ public class WorldMixin {
 
     long timeOfDay = ((World) (Object) this).getTimeOfDay() % 24000L;
 
-    return timeOfDay < 13570L || timeOfDay > 22370L;
+    return timeOfDay < 13100L || timeOfDay > 22600L;
 
   }
 }
