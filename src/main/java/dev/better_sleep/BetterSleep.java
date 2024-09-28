@@ -1,13 +1,13 @@
-package dev.no_sneaking_over_magma;
+package dev.better_sleep;
 
-import dev.no_sneaking_over_magma.utils.ModConstants;
+import dev.better_sleep.utils.ModConstants;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("unused")
 @Mod(ModConstants.MOD_ID)
-public final class NoSneakingOverMagma {
+public final class BetterSleep {
 
   public static final Logger LOGGER = LoggerFactory.getLogger(ModConstants.MOD_ID);
 }

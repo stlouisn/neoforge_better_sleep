@@ -1,0 +1,2 @@
+/ Comforts /
+dependencies { modLocalRuntime files ( "/../neoforge_comforts/files/comforts-1.21.1-neoforge-9.0.1.jar" ) }
